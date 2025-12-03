@@ -1,0 +1,120 @@
+body {
+    background-color: #0a0f2c; /* azul profundo metálico */
+    color: #e6e6fa; /* lavanda claro */
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #c084fc; /* lila metálico */
+    text-align: center;
+    font-size: 2em;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+}
+
+h2 {
+    color: #c084fc; /* lila metálico */
+    text-align: center;
+    font-size: 1.5em;    
+    margin-bottom: 0.5em;
+}
+
+h3 {
+    color: #c084fc; /* lila metálico */
+    text-align: left;
+    font-size: 1.2em;
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+}
+
+.section {
+    margin: 2em auto;
+    padding: 1.5em 2em;
+    background-color: rgba(255, 255, 255, 0.04);
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(138, 43, 226, 0.3);
+}
+
+.label {
+    font-weight: bold;
+    color: #7dd3fc; /* azul cielo claro */
+}
+
+.footer {
+    text-align: center;
+    font-size: 0.9em;
+    color: #9999cc;
+    margin-top: 3em;
+}
+
+a {
+    color: #065f46; /* dark green */
+    text-decoration: none;
+}
+
+a:hover {
+    color: #b45309; /* light green */
+    text-decoration: underline;
+}
+
+.btn {
+    background-color: #6366f1; /* azul-violeta vibrante */
+    color: #fff;
+    border: none;
+    padding: 0.6em 1.2em;
+    border-radius: 6px;
+    font-weight: bold;
+    box-shadow: 0 0 6px rgba(99, 102, 241, 0.5);
+    transition: background-color 0.3s ease;
+}
+.btn:hover {
+    background-color: #7c3aed;
+    color: #fff;
+}
+
+.alert-info {
+    background-color: #c084fc;
+    color: #0a0f2c;
+    padding: 1em;
+    border-radius: 6px;
+    margin-top: 1em;
+    font-weight: bold;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 2em;
+}
+
+.form-control {
+    background-color: #1e293b; /* azul grisáceo oscuro */
+    color: #e0e7ff;
+    border: 1px solid #7c3aed;
+    border-radius: 4px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2em;
+}
+.table th, .table td {
+    border: 1px solid #7c3aed;
+    padding: 0.6em;
+    text-align: left;
+}
+.table th {
+    background-color: #312e81;
+    color: #c084fc;
+}
+
+small#quantity-unit,
+small#time-unit {
+    font-size: 0.85em;
+    color: #a5b4fc;
+    font-style: italic;
+    margin-left: 0.5em;
+}

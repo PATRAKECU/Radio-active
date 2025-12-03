@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h2>Simulation History</h2>
+
+{% if rows %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Element</th>
+            <th>Initial Quantity (N₀)</th>
+            <th>Time (t)</th>
+            <th>Half-life</th>
+            <th>Remaining Quantity (N(t))</th>
+            <th>Date and Time</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in rows %}
+        <tr>
+            <td>{{ row.name }}</td>
+            <td>{{ row.n0 }} {{ row.quantity_unit }}</td>
+            <td>{{ row.t }} {{ row.unit }}</td>
+            <td>{{ row.half_life }} {{ row.unit }}</td>
+            <td>{{ row.nt }} {{ row.quantity_unit }}</td>
+            <td>{{ row.timestamp }}</td>
+            <td>
+                <a href="{{ url_for('simulation_detail', sim_id=row.id) }}" class="btn btn-sm btn-outline-primary">View</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No simulations yet.</p>
+{% endif %}
+
+{% endblock %}

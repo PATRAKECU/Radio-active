@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h2>Edit Simulation</h2>
+
+<form method="post">
+    {{ form.hidden_tag() }}
+
+    <div class="mb-3">
+        {{ form.element.label }}
+        {{ form.element(class="form-select") }}
+        {% for error in form.element.errors %}
+            <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="mb-3">
+        {{ form.n0.label }} <small id="quantity-unit">(e.g., grams)</small>
+        {{ form.n0(class="form-control") }}
+        {% for error in form.n0.errors %}
+            <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="mb-3">
+        {{ form.t.label }} <small id="time-unit">(e.g., years)</small>
+        {{ form.t(class="form-control") }}
+        {% for error in form.t.errors %}
+            <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    {{ form.submit(class="btn btn-primary") }}
+    <a href="{{ url_for('simulation_detail', sim_id=sim_id) }}" class="btn btn-secondary ms-2">Cancel</a>
+</form>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const elementSelect = document.querySelector("select[name='element']");
+    const timeUnit = document.getElementById("time-unit");
+    const quantityUnit = document.getElementById("quantity-unit");
+
+    async function updateUnits(elementId) {
+        try {
+            const response = await fetch(`/element/${elementId}/units`);
+            if (!response.ok) throw new Error("Network error");
+            const data = await response.json();
+            timeUnit.textContent = `(e.g., ${data.unit})`;
+            quantityUnit.textContent = `(e.g., ${data.quantity_unit})`;
+        } catch (err) {
+            console.error("Failed to fetch units:", err);
+            timeUnit.textContent = "";
+            quantityUnit.textContent = "";
+        }
+    }
+
+    if (elementSelect) {
+        updateUnits(elementSelect.value); // inicial
+        elementSelect.addEventListener("change", () => updateUnits(elementSelect.value));
+    }
+});
+</script>
+
+{% endblock %}

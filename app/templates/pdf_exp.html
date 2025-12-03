@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Simulation Report – {{ row.element_name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pdf_style.css') }}">
+</head>
+<body>
+    <h1>Radioactive Decay Simulation</h1>
+    <h2>{{ row.element_name }}</h2>    
+
+    <div class="section">
+        <div><span class="label">Initial Quantity (N₀):</span> {{ row.n0 }} {{ row.quantity_unit }}</div>
+        <div><span class="label">Elapsed Time (t):</span> {{ row.t }} {{ row.unit }}</div>
+        <div><span class="label">Half-life (t½):</span> {{ row.half_life }} {{ row.unit }}</div>
+        <div><span class="label">Decay Constant (λ):</span> {{ lam_str }} {{ row.unit }}⁻¹</div>
+        <div><span class="label">Remaining Quantity (N(t)):</span> {{ nt_str }} {{ row.quantity_unit }}</div>
+        <div><span class="label">Date and Time:</span> {{ row.timestamp }}</div>
+    </div>
+
+    <div class="section">
+        <h3>Mathematical Model</h3>
+        <div class="formula">
+            N(t) = N₀ · e^(−λt), λ = ln(2) / t₁/₂
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>Model with Real Values</h3>
+        <div class="formula">
+            λ = ln(2) / {{ row.half_life }} {{ row.unit }} ≈ {{ lam_str }} {{ row.unit }}⁻¹
+        </div>
+        <div class="formula">
+            N(t) = {{ row.n0 }} {{ row.quantity_unit }} · e^(−{{ lam_str }} {{ row.unit }}⁻¹ · {{ row.t }} {{ row.unit }}) ≈ {{ nt_str }} {{ row.quantity_unit }}
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>Decay Curve</h3>
+        <img src="{{ plot_path }}" alt="Decay Plot" style="width:100%; max-width:600px;">
+    </div>
+
+    <div class="footer">
+        Powered by <strong>Radio-active</strong> – A CS50 Final Project<br>
+        Author: Patricio Agurto | Generated on {{ row.timestamp }}
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h2>Results</h2>
+
+<h3 class="mt-4">Mathematical Model</h3>
+<p>The decay is calculated using the formula:</p>
+<div class="my-3">
+    <p>
+    $$N(t) = N_0 \cdot e^{-\lambda t}, \quad \lambda = \frac{\ln(2)}{t_{1/2}}$$
+    </p>
+
+    <p>
+    With your values:
+    </p>
+    <p>
+    $$\lambda = \frac{\ln(2)}{ {{ half_life }}\ \text{ {{ unit }} } } \approx {{ lam_str }}\ \text{ {{ unit }}^{-1} }$$
+    </p>
+
+    <p>
+    $$N(t) = {{ n0 }}\ \text{ {{ quantity_unit }} } \cdot e^{-{{ lam_str }}\ \text{ {{ unit }}^{-1} } \cdot {{ t }}\ \text{ {{ unit }} }} \approx {{ nt }}\ \text{ {{ quantity_unit }} }$$
+    </p>
+</div>
+
+<p><strong>Element:</strong> {{ name }}</p>
+<p><strong>Initial Quantity (N₀):</strong> {{ n0 }} {{ quantity_unit }}</p>
+<p><strong>Half-life (t½):</strong> {{ half_life }} {{ unit }}</p>
+<p><strong>Elapsed Time (t):</strong> {{ t }} {{ unit }}</p>
+<p><strong>Decay Constant (λ):</strong> {{ lam_str }} {{ unit }}⁻¹</p>
+<p><strong>Remaining Quantity (N(t)):</strong> {{ nt }} {{ quantity_unit }}</p>
+
+<h3>Decay Curve</h3>
+<div>{{ plot_html|safe }}</div>
+
+<div class="alert alert-info mt-4" role="alert">
+    This simulation has been saved automatically. To export it as a PDF, go to your <a href="{{ url_for('history') }}">simulation history</a> and open the detailed view.
+</div>
+<a href="/" class="btn btn-secondary mt-3">New simulation</a>
+
+{% endblock %}

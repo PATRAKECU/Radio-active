@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h2>Simulation Details</h2>
+
+<h3 class="mt-4">Mathematical Model</h3>
+<p>The decay is calculated using the formula:</p>
+<div class="my-3">
+    <p>
+    $$N(t) = N_0 \cdot e^{-\lambda t}, \quad \lambda = \frac{\ln(2)}{t_{1/2}}$$
+    </p>
+
+    <p>
+    With your values:
+    </p>
+    
+    <p>
+    $$\lambda = \frac{\ln(2)}{ {{ row.half_life }}\ \text{ {{ unit }} } } \approx {{ lam_str }}\ \text{ {{ unit }}^{-1} }$$
+    </p>
+
+    <p>
+    $$N(t) = {{ row.n0 }}\ \text{ {{ quantity_unit }} } \cdot e^{-{{ lam_str }}\ \text{ {{ unit }}^{-1} } \cdot {{ row.t }}\ \text{ {{ unit }} }} \approx {{ nt_str }}\ \text{ {{ quantity_unit }} }$$
+    </p>
+</div>
+
+<ul class="list-group">
+    <li class="list-group-item"><strong>Element:</strong> {{ row.element_name }}</li>
+    <li class="list-group-item"><strong>Initial Quantity (N₀):</strong> {{ row.n0 }} {{ quantity_unit }}</li>
+    <li class="list-group-item"><strong>Time (t):</strong> {{ row.t }} {{ unit }}</li>
+    <li class="list-group-item"><strong>Half-life:</strong> {{ row.half_life }} {{ unit }}</li>
+    <li class="list-group-item"><strong>Decay Constant (λ):</strong> {{ lam_str }} {{ unit }}⁻¹</li>
+    <li class="list-group-item"><strong>Remaining Quantity (N(t)):</strong> {{ nt_str }} {{ quantity_unit }}</li>
+    <li class="list-group-item"><strong>Date and Time:</strong> {{ row.timestamp }}</li>
+</ul>
+
+<h3 class="mt-4">Decay Plot</h3>
+<div>{{ plot_html|safe }}</div>
+
+<a href="{{ url_for('edit_simulation', sim_id=row.id) }}" class="btn btn-warning mt-3">Edit Simulation</a>
+<a href="{{ url_for('export_simulation_pdf', sim_id=row.id) }}" class="btn btn-outline-success mt-3" target="_blank">
+    Export as PDF
+</a>
+<a href="{{ url_for('history') }}" class="btn btn-secondary mt-3">Back to History</a>
+
+{% endblock %}
